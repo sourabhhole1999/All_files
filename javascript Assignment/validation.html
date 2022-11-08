@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Validation Form </title>
+    <style>
+        body {
+            background-image: url("./image/car.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .register {
+            height: auto;
+            width: 400px;
+            text-align: center;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .roundedf {
+            border-radius: 14px;
+        }
+
+        .heading {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .form-group {
+            margin-top: 5px;
+            text-align: left;
+        }
+
+        .gen {
+            margin-top: 10px;
+        }
+
+        .form-control {
+            display: block;
+            width: 94%;
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin-top: 8px;
+            color: #212529;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+        }
+
+        .text-dark {
+            color: #212529 !important;
+            font-weight: bolder !important
+        }
+
+        .btn {
+            padding: 9px;
+            border: none;
+            color: black;
+            font-size: 20px;
+            border-radius: 4px;
+            background-color: skyblue;
+        }
+
+        p {
+            margin: -1px 0px -5px 0px;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="roundedf register">
+        <h2 class="heading">Validation Form</h2>
+
+        <form id="myForm" action="">
+            <div class="form-group">
+                <label class="text-dark" for="">Full Name</label>
+                <p id="name1"></p>
+                <input type="text" class="form-control" id="fname" name="name" placeholder="Enter Full Name"><br><br>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark" for="">Mobile No</label>
+                <p id="mno1"></p>
+                <input type="number" class="form-control" id="mno" name="mno" placeholder="Enter Mobile No"><br><br>
+            </div>
+            <div class="form-group">
+                <label class="text-dark" for="">Email</label>
+                <p id="email1"></p>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email"><br><br>
+            </div>
+
+            <div class="form-group">
+                <label class="text-dark" for="">Password</label>
+                <p id="pwd1"></p>
+                <input type="password" class="form-control" id="pwd" name="pwd"
+                    placeholder="Enter 8 character password"><br><br>
+            </div>
+            <div class="form-group">
+                <label class="text-dark" for="">Gender</label><br />
+                <p id="gender1"></p>
+                <input type="radio" value="male" class="gen" name="gender"> Male
+                <input type="radio" value="female" class="gen" name="gender"> Female <br><br>
+
+            </div>
+            <div class="form-group">
+                <label class="text-dark" for="">Hobbies</label>
+                <p id="subject1"></p>
+                <select class="form-control" name="subject" id="subject">
+                    <option value="">Select Hobbies</option>
+                    <option value="JS">Cricket</option>
+                    <option value="PHP">Hockey</option>
+                    <option value="PYTHON">Football</option>
+                </select><br><br>
+
+            </div>
+            <div class="form-group">
+                <label class="text-dark" for=""> Programing Languages</label><br>
+                <p id="check1"></p>
+                <input type="checkbox" id="java" name="Java" value="Java">
+                <label>Java</label> <br>
+                <input type="checkbox" id="python" name="Python" value="Python" />
+                <label>Python</label> <br>
+                <input type="checkbox" id="php" name="PHP" value="PHP" />
+                <label>PHP</label>
+            </div>
+            <input type="submit" class="btn" id="btn" value="Register">
+        </form>
+    </div>
+
+
+
+    <script>
+        var btn = document.getElementById("btn");
+        var form = document.getElementById("myForm");
+        function handleForm(event) { event.preventDefault(); }
+        form.addEventListener('submit', handleForm);
+
+        btn.addEventListener("click", function () {
+            var fname1 = /^[a-zA-Z ]+$/;
+            var email1 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            var mno1 = /^[6-9][0-9]{9}$/;
+            var pwd1 = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,24}$/;
+            var fname = document.getElementById("fname").value;
+            var email = document.getElementById("email").value;
+            var mno = document.getElementById("mno").value;
+            var pwd = document.getElementById("pwd").value;
+            var gender = document.getElementsByName("gender");
+            var subject = document.getElementById("subject").value;
+            var lan1 = document.getElementById("java");
+            var lan2 = document.getElementById("python");
+            var lan3 = document.getElementById("php");
+
+
+            if (fname1.test(fname) && email1.test(email) && mno1.test(mno) && subject != "" && pwd1.test(pwd) && ((gender[0].checked == true) || (gender[1].checked == true)) && ((lan1.checked == true) || (lan2.checked == true) || (lan3.checked == true))) {
+
+                alert("Form Submit Succefully")
+                location.reload();
+
+            }
+            else {
+                if (!fname1.test(fname)) {
+                    var name = document.getElementById("name1")
+                    name.innerHTML = "Name should not be blank";
+                    name.style.color = "red";
+                    // alert("Name is Not valid")
+
+                }
+                if (!email1.test(email)) {
+                    var name = document.getElementById("email1")
+                    name.innerHTML = "Email address is not valid";
+                    name.style.color = "red";
+                }
+                if (!mno1.test(mno)) {
+                    var name = document.getElementById("mno1")
+                    name.innerHTML = "Mobile no is Not valid";
+                    name.style.color = "red";
+                }
+                if (!pwd1.test(pwd)) {
+                    var name = document.getElementById("pwd1")
+                    name.innerHTML = "password between 6 to 20 characters which contain at least one  uppercase,lowercase ,digit,special symbol and  ";
+                    name.style.color = "red";
+                }
+                if ((gender[0].checked == false) && (gender[1].checked == false)) {
+                    var name = document.getElementById("gender1")
+                    name.innerHTML = "Please choose your Gender: Male or Female";
+                    name.style.color = "red";
+                }
+                if (subject == "") {
+                    var name = document.getElementById("subject1")
+                    name.innerHTML = "Hobbies Required";
+                    name.style.color = "red";
+                }
+                if (((lan1.checked == false) && (lan2.checked == false) && (lan3.checked == false))) {
+                    var name = document.getElementById("check1")
+                    name.innerHTML = "Please select programing language";
+                    name.style.color = "red";
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
